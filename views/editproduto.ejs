@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title><%= title %></title>
+</head>
+<body>
+  <h1>Editar Produto</h1>
+  <form action="/produtos/editar/<%= produto.id %>" method="POST">
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" name="nome" value="<%= produto.nome %>" required>
+
+    <label for="sku">SKU:</label>
+    <input type="text" id="sku" name="sku" value="<%= produto.sku %>" required>
+
+    <label for="descricao">Descrição:</label>
+    <textarea id="descricao" name="descricao"><%= produto.descricao %></textarea>
+
+    <label for="preco">Preço:</label>
+    <input type="number" id="preco" name="preco" value="<%= produto.preco %>" required>
+
+    <label for="unidade_medida">Unidade de Medida:</label>
+    <input type="text" id="unidade_medida" name="unidade_medida" value="<%= produto.unidade_medida %>" required>
+
+    <label for="quantidade_min">Quantidade Mínima:</label>
+    <input type="number" id="quantidade_min" name="quantidade_min" value="<%= produto.quantidade_min %>" required>
+
+    <label for="quantidade_max">Quantidade Máxima:</label>
+    <input type="number" id="quantidade_max" name="quantidade_max" value="<%= produto.quantidade_max %>" required>
+
+    <label for="estoque_atual">Estoque Atual:</label>
+    <input type="number" id="estoque_atual" name="estoque_atual" value="<%= produto.estoque_atual %>" required>
+
+    <button type="submit">Salvar Alterações</button>
+  </form>
+</body>
+</html>

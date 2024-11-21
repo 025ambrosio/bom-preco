@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title><%= title %></title>
+</head>
+<body>
+  <h1>Editar Fornecedor</h1>
+  <form action="/fornecedores/editar/<%= fornecedor.id %>" method="POST">
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" name="nome" value="<%= fornecedor.nome %>" required>
+
+    <label for="contato">Contato:</label>
+    <input type="text" id="contato" name="contato" value="<%= fornecedor.contato %>" required>
+
+    <label for="endereco">Endereço:</label>
+    <input type="text" id="endereco" name="endereco" value="<%= fornecedor.endereco %>" required>
+
+    <button type="submit">Salvar Alterações</button>
+  </form>
+</body>
+</html>
