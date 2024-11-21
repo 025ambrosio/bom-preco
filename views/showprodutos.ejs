@@ -55,8 +55,12 @@
                 <td>
                   <!-- Botão de editar -->
                   <a href="/produtos/editar/<%= produto.id %>" class="btn btn-warning btn-sm">Editar</a>
-                </td>
-              </tr>
+                  <!-- Formulário de exclusão -->
+                  <form action="/produto/<%= produto._id %>?_method=DELETE" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir?')">
+                  <button type="submit" class="btn btn-danger btn-sm">Deletar</button>
+                  </form>
+              </td>
+          </tr>
             <% }) %>
           <% } else { %>
             <tr>

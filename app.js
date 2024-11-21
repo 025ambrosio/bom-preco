@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const path = require('path');
 const helmet = require('helmet');
 const morgan = require('morgan');
+const methodOverride = require('method-override');
 
 // Carregar variáveis de ambiente
 dotenv.config();
@@ -14,9 +15,10 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'views')); // Certifique-se de que a pasta 'views' está correta
 app.use(helmet());
 app.use(morgan('dev'));
+app.use(methodOverride('_method'));
 
 // Rota inicial
 app.get('/', (req, res) => {

@@ -54,6 +54,9 @@
                 <td><%= fornecedor.endereco %></td>
                 <td>
                   <a href="/fornecedores/editar/<%= fornecedor.id %>" class="btn btn-warning btn-sm">Editar</a>
+				<form action="/fornecedores/<%= fornecedor.id %>?_method=DELETE" method="POST" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja deletar este fornecedor?');">
+				  <button type="submit" class="btn btn-danger btn-sm">Deletar</button>
+				</form>
                 </td>
               </tr>
             <% }) %>
