@@ -1,14 +1,21 @@
 {
-  "name": "estoque",
+  "name": "estoque-bom-preco",
   "version": "1.0.0",
-  "main": "index.js",
+  "description": "Sistema de controle de estoque para mercadinho Bom Preço.",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "echo \"No test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "estoque",
+    "sistema",
+    "mercadinho",
+    "controle"
+  ],
+  "author": "Lucas",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "body-parser": "^1.20.3",
     "dotenv": "^16.4.5",
@@ -20,5 +27,8 @@
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
     "mysql2": "^3.11.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
   }
 }
