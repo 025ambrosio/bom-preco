@@ -3,7 +3,6 @@ const { listarProdutos } = require('../models/produtos');
 const { adicionarMovimentacao, listarMovimentacoes } = require('../models/movimentacoes');
 const router = express.Router();
 
-// Rota para exibir o formulário de movimentação
 router.get('/', async (req, res, next) => {
   try {
     const produtos = await listarProdutos();
@@ -13,7 +12,6 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-// Rota para processar a movimentação
 router.post('/', async (req, res, next) => {
   try {
     await adicionarMovimentacao(req.body);
@@ -23,7 +21,6 @@ router.post('/', async (req, res, next) => {
   }
 });
 
-// Rota para exibir o histórico
 router.get('/historico', async (req, res, next) => {
   try {
     const movimentacoes = await listarMovimentacoes();

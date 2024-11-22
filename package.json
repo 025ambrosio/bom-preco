@@ -8,12 +8,7 @@
     "dev": "nodemon app.js",
     "test": "echo \"No test specified\" && exit 1"
   },
-  "keywords": [
-    "estoque",
-    "sistema",
-    "mercadinho",
-    "controle"
-  ],
+  "keywords": ["estoque", "sistema", "mercadinho", "controle"],
   "author": "Lucas",
   "license": "ISC",
   "dependencies": {
@@ -29,6 +24,6 @@
     "mysql2": "^3.11.4"
   },
   "devDependencies": {
-    "nodemon": "^3.1.7"
+    "nodemon": "^3.0.1"
   }
 }

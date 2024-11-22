@@ -3,17 +3,15 @@ const Joi = require('joi');
 const { adicionarProduto, listarProdutos, editarProduto, deletarProduto } = require('../models/produtos');
 const router = express.Router();
 
-// Validação com Joi para produto
 const produtoSchema = Joi.object({
   nome: Joi.string().required(),
-  sku: Joi.string().required(), // SKU obrigatório
-  descricao: Joi.string().optional().allow(''), // Descrição é opcional
+  sku: Joi.string().required(), 
+  descricao: Joi.string().optional().allow(''), 
   preco: Joi.number().required(),
   quantidade: Joi.number().required(),
-  fornecedor_id: Joi.number().required() // fornecedor_id obrigatório
+  fornecedor_id: Joi.number().required() 
 });
 
-// Rota para listar produtos
 router.get('/', async (req, res, next) => {
   try {
     const produtos = await listarProdutos();
@@ -23,63 +21,56 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-// Rota para exibir o formulário de Adicionar Produto
 router.get('/adicionar', (req, res) => {
   res.render('addproduto', { title: 'Adicionar Produto' });
 });
 
-// Rota para processar Adicionar Produto
 router.post('/adicionar', async (req, res, next) => {
-  console.log('Dados recebidos:', req.body); // Verifique o corpo da requisição
+  console.log('Dados recebidos:', req.body); 
   
   const { error } = produtoSchema.validate(req.body);
   if (error) {
-    return res.status(400).send(error.details[0].message); // Retorna o erro de validação
+    return res.status(400).send(error.details[0].message); 
   }
 
   try {
-    // Adiciona o produto incluindo o campo 'sku'
     await adicionarProduto(req.body.nome, req.body.sku, req.body.descricao, req.body.preco, req.body.quantidade, req.body.fornecedor_id);
-    res.redirect('/produtos'); // Redireciona para a lista de produtos após a adição
+    res.redirect('/produtos');
   } catch (err) {
-    next(err); // Caso ocorra erro na adição
+    next(err);
   }
 });
 
-// Rota para exibir o formulário de Editar Produto
 router.get('/editar/:id', async (req, res, next) => {
   try {
-    const produto = await listarProdutos(req.params.id); // Obtém o produto pelo ID
+    const produto = await listarProdutos(req.params.id); 
     res.render('editproduto', { title: 'Editar Produto', produto });
   } catch (error) {
-    next(error); // Passa o erro para o middleware de tratamento
+    next(error);
   }
 });
 
-// Rota para processar Editar Produto
 router.post('/editar/:id', async (req, res, next) => {
   const { error } = produtoSchema.validate(req.body);
   if (error) {
-    return res.status(400).send(error.details[0].message); // Retorna erro de validação se necessário
+    return res.status(400).send(error.details[0].message);
   }
 
   try {
-    // Atualiza os dados do produto
     await editarProduto(req.params.id, req.body.nome, req.body.sku, req.body.descricao, req.body.preco, req.body.quantidade, req.body.fornecedor_id);
-    res.redirect('/produtos'); // Redireciona para a lista de produtos após a atualização
+    res.redirect('/produtos');
   } catch (err) {
-    next(err); // Passa o erro para o middleware de tratamento
+    next(err);
   }
 });
 
-// Rota para deletar um produto
 router.delete('/:id', async (req, res, next) => {
   try {
     const { id } = req.params;
-    await deletarProduto(id); // Deleta o produto
-    res.redirect('/produtos'); // Redireciona para a página de produtos após a exclusão
+    await deletarProduto(id);
+    res.redirect('/produtos');
   } catch (error) {
-    next(error); // Passa o erro para o middleware de tratamento
+    next(error);
   }
 });
 

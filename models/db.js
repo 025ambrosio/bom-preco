@@ -1,10 +1,12 @@
-const mysql = require('mysql2/promise');  // Importando a versão promissificada do mysql2
+require('dotenv').config();  
+
+const mysql = require('mysql2/promise');  
 
 const db = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    password: 'lucas123',
-    database: 'bompreco'
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME
 });
 
-module.exports = db;  // Exportando o pool de conexões
+module.exports = db;

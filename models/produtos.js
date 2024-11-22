@@ -1,11 +1,10 @@
-const db = require('./db'); // Conexão com o banco de dados (MySQL)
+const db = require('./db');
 
 const adicionarProduto = async (nome, sku, descricao, preco, unidade_medida, quantidade_min, quantidade_max, estoque_atual) => {
   const query = `
     INSERT INTO produtos (nome, sku, descricao, preco, unidade_medida, quantidade_min, quantidade_max, estoque_atual)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
 
-  // Garantir que não há valores undefined
   const values = [
     nome || "Nome não especificado",
     sku || "000000",
@@ -17,7 +16,7 @@ const adicionarProduto = async (nome, sku, descricao, preco, unidade_medida, qua
     estoque_atual || 0
   ];
 
-  console.log("Valores recebidos para inserção:", values); // Debug
+  console.log("Valores recebidos para inserção:", values);
 
   try {
     await db.execute(query, values);
@@ -32,7 +31,7 @@ const listarProdutos = async (id) => {
   const values = [];
   
   if (id) {
-    query += ' WHERE id = ?';  // Se um id for fornecido, filtra os produtos
+    query += ' WHERE id = ?';
     values.push(id);
   }
 

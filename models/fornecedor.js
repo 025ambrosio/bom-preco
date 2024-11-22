@@ -1,28 +1,25 @@
-const db = require('./db'); // Importando o pool de conexões
+const db = require('./db'); 
 
-// Adicionar fornecedor
 const adicionarFornecedor = async (nome, contato, endereco, produtos_fornecidos) => {
   const query = `
     INSERT INTO fornecedores (nome, contato, endereco, produtos_fornecidos)
     VALUES (?, ?, ?, ?)
   `;
   
-  // Usando o valor de produtos_fornecidos do parâmetro
-  const values = [nome, contato, endereco, produtos_fornecidos || '']; // Caso o campo esteja vazio, insere uma string vazia ou NULL
+  const values = [nome, contato, endereco, produtos_fornecidos || ''];
 
   try {
-    await db.execute(query, values); // Executa a query no banco
+    await db.execute(query, values);
   } catch (error) {
     throw new Error('Erro ao adicionar fornecedor: ' + error.message);
   }
 };
 
-// Listar fornecedores
 const listarFornecedores = async (id = null) => {
   let query = 'SELECT * FROM fornecedores';
   
   if (id) {
-    query += ' WHERE id = ?'; // Se um ID for passado, filtra por ele
+    query += ' WHERE id = ?';
   }
 
   try {
@@ -33,7 +30,6 @@ const listarFornecedores = async (id = null) => {
   }
 };
 
-// Editar fornecedor
 const editarFornecedor = async (id, nome, contato, endereco, produtos_fornecidos) => {
   const query = `
     UPDATE fornecedores
@@ -41,22 +37,21 @@ const editarFornecedor = async (id, nome, contato, endereco, produtos_fornecidos
     WHERE id = ?
   `;
 
-  // Passando o valor de produtos_fornecidos para a query
   const values = [nome, contato, endereco, produtos_fornecidos, id];
 
   try {
-    await db.execute(query, values); // Executa a query para editar o fornecedor
+    await db.execute(query, values);
   } catch (error) {
     throw new Error('Erro ao editar fornecedor: ' + error.message);
   }
 };
 
-// Deletar fornecedor
+
 const deletarFornecedor = async (id) => {
   const query = 'DELETE FROM fornecedores WHERE id = ?';
   
   try {
-    await db.execute(query, [id]); // Executa a query para deletar o fornecedor
+    await db.execute(query, [id]); 
   } catch (error) {
     throw new Error('Erro ao deletar fornecedor: ' + error.message);
   }
